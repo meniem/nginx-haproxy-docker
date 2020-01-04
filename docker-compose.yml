@@ -1,0 +1,43 @@
+version: '3'
+ 
+services:
+    nginx_web_1:
+        container_name: ${LB_PROJECT_NAME}_NGINX_con_1
+        build: ./nginx/web1
+        expose:
+            - ${NGINX_EXPOSED_PORT}
+        networks:
+            public_net:
+                ipv4_address: ${NGINX_1_IP}
+                aliases: 
+                    - nginx1
+    nginx_web_2:
+        container_name: ${LB_PROJECT_NAME}_NGINX_con_2
+        build: ./nginx/web2
+        expose:
+            - ${NGINX_EXPOSED_PORT}
+        networks:
+            public_net:
+                ipv4_address: ${NGINX_2_IP}
+                aliases: 
+                    - nginx2
+    haproxy:
+        build: ./haproxy
+        ports:
+            - 80:80
+        expose:
+            - 80
+        networks:
+            public_net:
+                ipv4_address: ${HA_PROXY_IP}
+        environment:
+            - NGINX_1_IP=${NGINX_1_IP}
+            - NGINX_2_IP=${NGINX_2_IP}
+            - NGINX_EXPOSED_PORT=${NGINX_EXPOSED_PORT}
+networks:
+    public_net:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: ${NETWORK_SUBNET}
