@@ -20,7 +20,7 @@ Creates HAProxy load balancer for two Nginx web servers using Docker containers 
 
 
 # Repo structure:
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+[![N|Solid](https://raw.githubusercontent.com/meniem/nginx-haproxy-docker/master/structure.jpg)](https://raw.githubusercontent.com/meniem/nginx-haproxy-docker/master/structure.jpg)
 
 # Installation steps:
  - Clone the repo
